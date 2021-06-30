@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="src/styles.css" />
+    <script src="src/index.js"></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+  
+  <style> 
+  /* Control the left side */
+.left {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #a3c0d3;
+  height: 100%;
+  width: 30%;
+  overflow-x: hidden;
+  padding-top: 0px;
+}
+.weather {
+  left: 0px;
+  position: fixed;
+  display: flex;
+  max-width: 100%;
+  max-height: 100%;
+  width: 460px;
+  height: 760px;
+  overflow: hidden;
+}
+
+.emoji {
+  /* Saturday */
+  display: flex;
+  position: relative;
+  right: -300px;
+  top: -60px;
+  width: 80px;
+  height: 80px;
+}
+.emoji2 {
+  /* Sunday */
+  display: flex;
+  position: relative;
+  right: -300px;
+  top: -60px;
+  width: 80px;
+  height: 80px;
+}
+.emoji3 {
+  /* Monday */
+  display: flex;
+  position: relative;
+  right: -300px;
+  top: -60px;
+  width: 80px;
+  height: 80px;
+}
+.emoji4 {
+  /* Tuesday */
+  display: flex;
+  position: relative;
+  right: -300px;
+  top: -60px;
+  width: 80px;
+  height: 65px;
+}
+.emoji5 {
+  /* Wednesday */
+  display: flex;
+  position: relative;
+  right: -300px;
+  top: -60px;
+  width: 80px;
+  height: 80px;
+}
+.emoji6 {
+  /* Thursday */
+  display: flex;
+  position: relative;
+  right: -300px;
+  top: -60px;
+  width: 80px;
+  height: 80px;
+}
+.measure {
+  display: flex;
+  position: relative;
+  text-align: center;
+  left: 55%;
+  top: -30%;
+  margin: 100px auto;
+  padding: 20px 10px 20px 10px;
+  position: relative;
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+}
+#temperature {
+  left: 28%;
+  top: 2%;
+  margin: 100px auto;
+  padding: 20px 10px 20px 10px;
+  position: relative;
+  text-align: center;
+  font-weight: 600;
+  font-size: 100px;
+  color: rgb(0, 0, 0);
+}
+#celsius {
+  color: black;
+  text-decoration: none;
+}
+#fahrenheit {
+  color: black;
+  text-decoration: none;
+}
+
+.title {
+  /* 20ºC */
+  margin: 10px auto;
+  top: 2%;
+  padding: 10px 2px 40px 2px;
+  position: relative;
+  text-align: center;
+  font-family: "Jost", sans-serif;
+  font-weight: 600;
+  text-decoration: underline;
+  font-size: 100px;
+  color: rgb(0, 0, 0);
+  text-shadow: rgba(207, 112, 29, 0.651) 6px 8px 40px;
+}
+.title:hover {
+  text-shadow: rgba(207, 112, 29, 0.651) 6px 8px 40px;
+  transition: all 600ms ease-in-out;
+}
+
+h5 {
+  top: 6%;
+  margin: 10px auto;
+  padding: 2px 1px 2px 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-family: "Jost", sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+  border-radius: 1.25em;
+  text-transform: uppercase;
+}
+
+#search-text {
+  background-color: rgb (231, 210, 191);
+  top: 50px;
+  left: 80px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+#search-button {
+  top: 20px;
+  left: 284px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.subtitle1 {
+  /* Currently */
+  top: 15%;
+  margin: 80px auto;
+  padding: 6px 1px 2px 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  text-transform: uppercase;
+  font-family: "Jost", sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  width: 300px;
+  color: black;
+  text-shadow: rgb(145, 183, 210, 0.6) 4px 6px 20px;
+}
+
+.time {
+  margin: 80px auto;
+  padding: 4px 1px 2px 2px;
+  top: 4%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-family: "Jost", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  width: 300px;
+  color: rgb(55, 61, 65);
+  box-shadow: rgba(0, 0, 0, 0.1) 8px 20px 10px, rgba(0, 0, 0, 0.1) 8px 20px 20px;
+  border-radius: 1.25em;
+}
+
+.city-input {
+  display: flex;
+  position: relative;
+  top: 30px;
+  left: 40px;
+  width: 200px;
+  height: 30px;
+}
+
+.emoji7 {
+  /* Currently/Subtitle */
+  display: flex;
+  position: relative;
+  left: 2%;
+  top: 20%;
+  width: 50px;
+  height: 50px;
+}
+
+/* Control the right side */
+.right {
+  display: flex;
+  position: fixed;
+  display: block;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 70%;
+  position: fixed;
+  overflow-x: hidden;
+  padding-top: 20px;
+  background: linear-gradient(
+    to top,
+    rgb(226, 231, 237) 0%,
+    rgb(174, 204, 230) 100%
+  );
+}
+
+.btn.btn-primary {
+  display: inline-block;
+  padding: 16px 2px 4px 0px;
+  text-align: left;
+  width: 100%;
+  position: relative;
+  justify-content: center;
+  background-color: rgb(226, 231, 237);
+  border: solid 0.5px rgba(152, 175, 193, 0.2);
+  border-radius: 10px;
+  font-family: "Jost", sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: black;
+}
+.btn.btn-primary:hover {
+  transition: all 200ms ease-in-out;
+  background-color: rgb(211, 221, 230, 0.8);
+  color: black;
+}
+
+.day {
+  position: absolute;
+  margin-top: 0px;
+  display: block;
+  left: 260px;
+  top: 25px;
+}
+.lists {
+  display: flex;
+  position: relative;
+  list-style: none;
+  margin-top: 6px;
+  margin-left: 80%;
+  display: block;
+  right: -20px;
+  top: 6px;
+}
+#lists1 {
+  list-style: none;
+  margin-top: 6px;
+  display: block;
+  right: -20px;
+  top: 6px;
+}
+
+#fahrenheit-link {
+  text-decoration: none;
+}
+
+#celsius-link {
+  text-decoration: none;
+}
+
+  </style>
+  
+  <script> 
+  //CurrentDate - e.g " Tuesday, June 29, 14:50, 2021 "
+
+let now = new Date();
+let date = now.getDate();
+let hours = now.getHours();
+let minutes = now.getMinutes();
+let year = now.getFullYear();
+let days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+let day = days[now.getDay()];
+let months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+let month = months[now.getMonth()];
+let h3 = document.querySelector("h3");
+h3.innerHTML = `${day} ${month} ${date} ${hours}:${minutes}, ${year}`;
+
+//Form - Search for Your City
+
+function search(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#search-text");
+  let h5 = document.querySelector("h5");
+  h5.innerHTML = ` ${searchInput.value}`;
+}
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", search);
+
+// API - Show City
+
+let apiKey = "10a4c9df0a4335af83e171aa8f6662cd";
+let city = "Sydney";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
+
+function showWeather(response) {
+  console.log(response.data);
+
+  let temperature = Math.round(response.data.main.temp);
+  let temperatureElement = document.querySelector("#temperature");
+  let description = document.querySelector("#temperature-description");
+  temperatureElement.innerHTML = `It is ${temperature} ºC`;
+  description.innerHTML = response.data.weather[0].description;
+}
+
+let h2 = document.querySelector("#city");
+h2.innerHTML = city;
+
+/*document.getElementById("city").innerHTML = `It is ${temperature}ºC in ${city}`;*/
+
+axios.get(`${apiUrl}&appid=${apiKey}`).then(showWeather);
+
+//Change Temperature - " 20 ºC|ºF"
+
+function convertCelsius(event) {
+  event.preventDefault();
+  let currentTemp = document.querySelector("#temperature");
+  let convertCelsius = "20";
+  currentTemp.innerHTML = "20";
+}
+let showCelsius = document.querySelector("#celsius");
+showCelsius.addEventListener("click", convertCelsius);
+
+function convertFahrenheit(event) {
+  event.preventDefault();
+  let currentTemp = document.querySelector("#temperature");
+  let convertFahrenheit = "68";
+  currentTemp.innerHTML = "68";
+}
+let showFahrenheit = document.querySelector("#fahrenheit");
+showFahrenheit.addEventListener("click", convertFahrenheit);
+
+  
+  </script>
+  
+  
+    <!-- Left Side -->
+    <div class="left">
+      <div class="weather">
+        <img src=
+        https://s3.amazonaws.com/shecodesio-production/uploads/files/000/011/884/original/weather.jpg?1624972180
+        alt="weather" />
+      </div>
+
+      <form id="search-form">
+        <input
+          id="search-text"
+          type="text"
+          placeholder="Search for your city..."
+          class="city-input"
+          autocomplete="off"
+          autofocus="on"
+          id="search-text-input"
+        />
+
+        <input id="search-button" type="submit" value="Search" />
+      </form>
+
+      <h5></h5>
+
+      <h3 class="time">Tuesday, June 29 16:00, 2021</h3>
+      <h2 class="subtitle1">
+        Currently <img src="image/sunny.png" alt="" class="emoji7" />
+      </h2>
+
+      <div id="city"></div>
+      <div id="temperature-description"></div>
+      <div id="temperature"></div>
+
+      <span class="measure">
+        <a href="#" id="celsius">ºC</a> &nbsp;|&nbsp;
+        <a href="#" id="fahrenheit">ºF</a>
+      </span>
+    </div>
+
+    <!-- Right Side -->
+
+    <div class="right">
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button">
+          <h1 class="day">
+            22 Saturday <img src="image/sunny.png" alt="sunny" class="emoji" />
+          </h1>
+
+          <ul>
+            <li class="lists" id="lists1">23º</li>
+            <li class="lists">28º</li>
+          </ul>
+        </button>
+        <button class="btn btn-primary" type="button">
+          <h1 class="day">
+            23 Sunday <img src="image/sunny.png" alt="sunny" class="emoji2" />
+          </h1>
+          <ul>
+            <li class="lists" id="lists1">21º</li>
+            <li class="lists">19º</li>
+          </ul>
+        </button>
+        <button class="btn btn-primary" type="button">
+          <h1 class="day">
+            24 Monday
+            <img src="image/cloudy.png" alt="clouudy" class="emoji3" />
+          </h1>
+          <ul>
+            <li class="lists" id="lists1">22º</li>
+            <li class="lists">20º</li>
+          </ul>
+        </button>
+        <button class="btn btn-primary" type="button">
+          <h1 class="day">
+            25 Tuesday <img src="image/cloud.png" alt="cloud" class="emoji4" />
+          </h1>
+          <ul>
+            <li class="lists" id="lists1">20º</li>
+            <li class="lists">18º</li>
+          </ul>
+        </button>
+        <button class="btn btn-primary" type="button">
+          <h1 class="day">
+            26 Wednesday
+            <img src="image/cloudy.png" alt="cloudy" class="emoji5" />
+          </h1>
+          <ul>
+            <li class="lists" id="lists1">19º</li>
+            <li class="lists">17º</li>
+          </ul>
+        </button>
+        <button class="btn btn-primary" type="button">
+          <h1 class="day">
+            27 Thursday <img src="image/sunny.png" alt="sunny" class="emoji6" />
+          </h1>
+          <ul>
+            <li class="lists" id="lists1">24º</li>
+            <li class="lists">20º</li>
+          </ul>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
